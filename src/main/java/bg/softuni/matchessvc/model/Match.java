@@ -23,10 +23,10 @@ public class Match {
     private UUID id;
 
     @Column(nullable = false)
-    private Long homeTeamId;
+    private UUID homeTeamId;
 
     @Column(nullable = false)
-    private Long awayTeamId;
+    private UUID awayTeamId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

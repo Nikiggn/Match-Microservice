@@ -2,7 +2,7 @@ package bg.softuni.matchessvc.web;
 
 import bg.softuni.matchessvc.model.Match;
 import bg.softuni.matchessvc.service.MatchService;
-import bg.softuni.matchessvc.web.dto.MatchCreations;
+import bg.softuni.matchessvc.web.dto.MatchCreation;
 import bg.softuni.matchessvc.web.mapper.DtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class MatchController {
 
 
     @PostMapping("/new")
-    public ResponseEntity<Void> createMatch(@RequestBody MatchCreations request) {
+    public ResponseEntity<Void> createMatch(@RequestBody MatchCreation request) {
         matchService.createMatch(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

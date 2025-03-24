@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MatchCreations {
-    private Long homeTeamId;
-    private Long awayTeamId;
+public class MatchCreation {
+    private UUID homeTeamId;
+    private UUID awayTeamId;
     private LocalDateTime date;
     private MatchStatus status;
     private int homeScore;  // Nullable for non-completed matches

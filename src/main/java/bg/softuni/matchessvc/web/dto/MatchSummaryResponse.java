@@ -1,25 +1,24 @@
 package bg.softuni.matchessvc.web.dto;
 
 import bg.softuni.matchessvc.model.MatchStatus;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
-@Builder
-public class MatchResponse {
-    private UUID homeTeam;
-    private UUID awayTeam;
+@NoArgsConstructor
+@AllArgsConstructor
+public class MatchSummaryResponse {
+
+    private UUID id;
+    private UUID homeTeamId;
+    private UUID awayTeamId;
     private LocalDateTime date;
     private MatchStatus status;
-
-    //Optional
     private int homeScore;
     private int awayScore;
-    private List<Long> homePlayersIds;
-    private List<Long> awayPlayersIds;
-    private Long matchMvpId;
+
 }
