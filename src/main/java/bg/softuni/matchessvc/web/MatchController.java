@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/matches")
@@ -36,5 +37,12 @@ public class MatchController {
         return  ResponseEntity
                 .status(HttpStatus.OK)
                 .body(list);
+    }
+
+    @GetMapping("/club")
+    public ResponseEntity<List<MatchCreation>> getMatchesByClubId(@RequestParam UUID clubId) {
+        List<MatchCreation> matches = matchService.getMatchesByClubId(clubId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(matches);
     }
 }

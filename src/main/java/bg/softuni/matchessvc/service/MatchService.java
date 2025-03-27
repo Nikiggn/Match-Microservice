@@ -3,7 +3,6 @@ package bg.softuni.matchessvc.service;
 import bg.softuni.matchessvc.model.Match;
 import bg.softuni.matchessvc.repository.MatchRepository;
 import bg.softuni.matchessvc.web.dto.MatchCreation;
-import bg.softuni.matchessvc.web.dto.MatchSummaryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,27 +30,24 @@ public class MatchService {
                 request.getStatus(),
                 request.getDate(),
                 request.getHomeScore(),
-                request.getAwayScore());
+                request.getAwayScore(),
+                request.getRefereeId());
 
         return matchRepository.save(match);
     }
 
-//    public MatchSummaryResponse getMatch(UUID matchId) {
-//        Match match = matchRepository.findById(matchId)
-//                .orElseThrow(() -> new RuntimeException("Match not found"));
-//
-//        return new MatchSummaryResponse(
-//                match.getId(),
-//                match.getHomeTeamId(),
-//                match.getAwayTeamId(),
-//                match.getDate(),
-//                match.getStatus(),
-//                match.getHomeScore(),
-//                match.getAwayScore()
-//        );
-//    }
+    public List<MatchCreation> getMatchesByClubId(UUID clubId) {
+        List<Match> matches = matchRepository.findByHomeTeamIdOrAwayTeamId(clubId, clubId);
 
-//    public List<MatchSummaryResponse> getAllMatchesByClub(Long teamId) {
-//
-//    }
+        return matches.stream().map(match -> new MatchCreation(
+                match.getHomeTeamId(),
+                match.getAwayTeamId(),
+                match.getDate(),
+                match.getStatus(),
+                match.getHomeScore(),
+                match.getAwayScore(),
+                match.getRefereeId()
+        )).toList();
+    }
+
 }

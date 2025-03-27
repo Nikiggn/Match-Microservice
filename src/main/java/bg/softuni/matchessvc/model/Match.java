@@ -39,4 +39,6 @@ public class Match {
 
     private int awayScore;
 
+    private UUID refereeId;
+
 }

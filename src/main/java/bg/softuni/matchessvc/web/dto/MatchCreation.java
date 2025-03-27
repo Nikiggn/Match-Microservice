@@ -16,6 +16,7 @@ public class MatchCreation {
     private UUID awayTeamId;
     private LocalDateTime date;
     private MatchStatus status;
-    private int homeScore;  // Nullable for non-completed matches
-    private int awayScore;  // Nullable for non-completed matches
+    private int homeScore;
+    private int awayScore;
+    private UUID refereeId;
 }
