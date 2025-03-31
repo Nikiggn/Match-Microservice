@@ -24,6 +24,8 @@ public class MatchService {
     }
 
     public Match createMatch(MatchCreation request) {
+
+
         Match match = new Match(null,
                 request.getHomeTeamId(),
                 request.getAwayTeamId(),

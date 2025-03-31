@@ -30,9 +30,9 @@ public class MatchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Object>> getAllMatches() {
-        List <Match> matches = matchService.getAllMatches();
-        List<Object> list  = matches.stream().map(DtoMapper::fromMatchCreation).toList();
+    public ResponseEntity<List<MatchCreation>> getAllMatches() {
+        List<Match> matches = matchService.getAllMatches();
+        List<MatchCreation> list  = matches.stream().map(DtoMapper::fromMatchCreation).toList();
 
         return  ResponseEntity
                 .status(HttpStatus.OK)
@@ -43,6 +43,8 @@ public class MatchController {
     public ResponseEntity<List<MatchCreation>> getMatchesByClubId(@RequestParam UUID clubId) {
         List<MatchCreation> matches = matchService.getMatchesByClubId(clubId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(matches);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(matches);
     }
 }
