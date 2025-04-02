@@ -40,4 +40,16 @@ public class Match {
 
     private UUID refereeId;
 
+    private boolean processed;
+
+    public Match(UUID id, UUID homeTeamId, UUID awayTeamId, MatchStatus status, LocalDateTime date, int homeScore, int awayScore, UUID refereeId) {
+        this.id = id;
+        this.homeTeamId = homeTeamId;
+        this.awayTeamId = awayTeamId;
+        this.status = status;
+        this.date = date;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        this.refereeId = refereeId;
+    }
 }

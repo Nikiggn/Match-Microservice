@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, UUID> {
     List<Match> findByHomeTeamIdOrAwayTeamId(UUID homeTeamId, UUID awayTeamId);
- }
+    List<Match> findByProcessedFalse();
+
+}
