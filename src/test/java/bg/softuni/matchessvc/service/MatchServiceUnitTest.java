@@ -4,6 +4,7 @@ import bg.softuni.matchessvc.model.Match;
 import bg.softuni.matchessvc.model.MatchStatus;
 import bg.softuni.matchessvc.repository.MatchRepository;
 import bg.softuni.matchessvc.web.dto.MatchCreation;
+import bg.softuni.matchessvc.web.dto.MatchForProcessing;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -94,6 +96,30 @@ public class MatchServiceUnitTest {
          List<MatchCreation> result = matchService.getMatchesByClubId(clubId);
 
          assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testUpdateMatch_Success() {
+        // Arrange
+        UUID matchId = UUID.randomUUID();
+        Match existingMatch = new Match();
+        existingMatch.setId(matchId);
+        existingMatch.setProcessed(false);
+
+        MatchForProcessing updateRequest = new MatchForProcessing();
+        updateRequest.setProcessed(true);
+
+        when(matchRepository.findById(matchId)).thenReturn(Optional.of(existingMatch));
+        when(matchRepository.save(any(Match.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        Match updatedMatch = matchService.updateMatch(matchId, updateRequest);
+
+        // Assert
+        assertNotNull(updatedMatch);
+        assertTrue(updatedMatch.isProcessed());  // Ensuring the processed flag was updated
+        verify(matchRepository).findById(matchId);
+        verify(matchRepository).save(existingMatch);
     }
 
 
